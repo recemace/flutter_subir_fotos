@@ -16,6 +16,7 @@ class _HomePage extends State<HomePage> {
   File file;
   String lnk_image_server = '';
   String url = '';
+  String boton_subir = 'Subir imagen al servidor';
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +29,12 @@ class _HomePage extends State<HomePage> {
             children: <Widget>[
               RaisedButton(
                 onPressed: _choose,
-                child: Text('Choose Image'),
+                child: Text('Toma una foto'),
               ),
               SizedBox(width: 10.0),
               RaisedButton(
                 onPressed: _upload,
-                child: Text('Upload Image'),
+                child: Text(boton_subir),
               )
             ],
           ),
@@ -43,9 +44,9 @@ class _HomePage extends State<HomePage> {
                 url = Constants.URL_SERVER + lnk_image_server + '.jpg';
                 launch(url);
               },
-              child: new Text(lnk_image_server),
+              child: new Text('Ver foto: ' + lnk_image_server + '.jpg'),
             ),
-          if (file == null) Text('No Image Selected') else Image.file(file)
+          if (file == null) Text('No hay foto') else Image.file(file)
         ],
       ),
     );
@@ -59,11 +60,14 @@ class _HomePage extends State<HomePage> {
 
   void _upload() {
     if (file == null) return;
+    boton_subir = 'Subiendo...';
+    setState(() {});
     final String subir_imagen = Constants.URL_SERVER + 'fotos.php';
     String base64Image = base64Encode(file.readAsBytesSync());
     http.post(subir_imagen,
         body: {"image": 'data:image/jpeg;base64,' + base64Image}).then((res) {
       lnk_image_server = res.body;
+      boton_subir = 'Subir imagen al servidor';
       setState(() {});
     }).catchError((err) {
       print(err);

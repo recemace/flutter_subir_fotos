@@ -1,16 +1,12 @@
 # subir_fotos
 
-A new Flutter project.
+Proyecto en flutter probando la subida de fotos en base64.
 
-## Getting Started
+## Notas
 
-This project is a starting point for a Flutter application.
+Crear carpeta y archivo en: lib/src/utils/constants.dart
 
-A few resources to get you started if this is your first Flutter project:
+con el siguiente codigo:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+library constants;
+const String URL_SERVER = "http://mi-servidor/mi-carpeta-de-fotos/"; // reemplaza esta url por tu servidor donde vas a alojar tu php
